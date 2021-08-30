@@ -1,6 +1,6 @@
-import _BN from 'bn.js';
+import BN from 'bn.js';
 
-export class BN extends _BN {
+export class Gas extends BN {
   toJSON(): string {
     return this.toString(10);
   }

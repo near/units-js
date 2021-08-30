@@ -29,9 +29,10 @@
     "xo": "^0.44.0"
   },
   "jest": {
+    "preset": "ts-jest",
     "testEnvironment": "node",
     "testMatch": [
-      "**/__tests__/*.spec.js"
+      "**/__tests__/*.spec.ts"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"
