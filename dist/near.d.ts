@@ -2,15 +2,10 @@ import BN from 'bn.js';
 /**
  * Exponent for calculating how many indivisible units are there in one NEAR. See {@link NEAR_NOMINATION}.
  */
-export declare const NEAR_NOMINATION_EXP = 24;
-/**
- * Number of indivisible units in one NEAR. Derived from {@link NEAR_NOMINATION_EXP}.
- */
-export declare const NEAR_NOMINATION: BN;
+export declare const DECIMALS = 24;
 export declare class NEAR extends BN {
     /**
      * Convert human readable NEAR amount to internal indivisible units.
-     * Effectively this multiplies given amount by {@link NEAR_NOMINATION}.
      *
      * @param amt decimal string (potentially fractional) denominated in NEAR.
      * @returns new NEAR object wrapping the parsed amount

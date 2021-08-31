@@ -4,19 +4,11 @@ import {clean, toHuman} from './utils';
 /**
  * Exponent for calculating how many indivisible units are there in one NEAR. See {@link NEAR_NOMINATION}.
  */
-export const NEAR_NOMINATION_EXP = 24;
-
-/**
- * Number of indivisible units in one NEAR. Derived from {@link NEAR_NOMINATION_EXP}.
- */
-export const NEAR_NOMINATION = new BN('10', 10).pow(
-  new BN(NEAR_NOMINATION_EXP, 10),
-);
+export const DECIMALS = 24;
 
 export class NEAR extends BN {
   /**
    * Convert human readable NEAR amount to internal indivisible units.
-   * Effectively this multiplies given amount by {@link NEAR_NOMINATION}.
    *
    * @param amt decimal string (potentially fractional) denominated in NEAR.
    * @returns new NEAR object wrapping the parsed amount
@@ -36,13 +28,13 @@ export class NEAR extends BN {
 
     const wholePart = split[0];
     const fracPart = split[1] || '';
-    if (fracPart.length > NEAR_NOMINATION_EXP) {
+    if (fracPart.length > DECIMALS) {
       throw new Error(
-        `Cannot parse '${amt}' as NEAR amount; fractional part contains more than ${NEAR_NOMINATION_EXP} digits`,
+        `Cannot parse '${amt}' as NEAR amount; fractional part contains more than ${DECIMALS} digits`,
       );
     }
 
-    return new NEAR(wholePart + fracPart.padEnd(NEAR_NOMINATION_EXP, '0'));
+    return new NEAR(wholePart + fracPart.padEnd(DECIMALS, '0'));
   }
 
   /**
@@ -62,6 +54,6 @@ export class NEAR extends BN {
    * @returns string showing NEAR amount in a human-readable way
    */
   toHuman(): string {
-    return toHuman(this, NEAR_NOMINATION, 'N');
+    return toHuman(this, 'N', DECIMALS);
   }
 }

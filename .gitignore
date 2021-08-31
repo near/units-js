@@ -1,3 +1,5 @@
+coverage
+
 # set up Yarn 2 in zero-install mode - https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
 .yarn/*
 !.yarn/cache

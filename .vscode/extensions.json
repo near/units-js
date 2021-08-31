@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "arcanis.vscode-zipfs",
-    "spence-s.linter-xo"
+    "spence-s.linter-xo",
+    "Orta.vscode-jest"
   ]
 }
