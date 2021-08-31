@@ -13,7 +13,9 @@
   "scripts": {
     "build": "tsc",
     "lint": "xo",
-    "test": "yarn build && jest --verbose"
+    "lint:fix": "xo --fix",
+    "test": "yarn build && jest --verbose",
+    "prepare": "husky install"
   },
   "dependencies": {
     "bn.js": "^5.2.0"
@@ -22,6 +24,7 @@
     "@types/bn.js": "^5.1.0",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.7",
+    "husky": "^7.0.2",
     "jest": "^27.1.0",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
@@ -43,7 +46,15 @@
     "prettier": true,
     "rules": {
       "unicorn/prefer-node-protocol": 0
-    }
+    },
+    "overrides": [
+      {
+        "files": "__tests__/**/*.spec.ts",
+        "rules": {
+          "@typescript-eslint/restrict-template-expressions": 0
+        }
+      }
+    ]
   },
   "packageManager": "yarn@3.0.1"
 }

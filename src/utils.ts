@@ -1,4 +1,4 @@
-import * as BN from "bn.js";
+import * as BN from 'bn.js';
 
 /**
  * Removes commas, underscores, leading/trailing whitespace, and leading zeroes from the input
@@ -10,5 +10,11 @@ export function clean(x: string): string {
 }
 
 export function toHuman(x: BN, nomination: BN, baseUnit: string): string {
-  throw new Error('toHuman not yet implemented');
+  throw new Error(
+    `toHuman not yet implemented; called with ${JSON.stringify({
+      x,
+      nomination,
+      baseUnit,
+    })}`,
+  );
 }

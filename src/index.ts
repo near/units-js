@@ -1,2 +1,2 @@
-export * from './near'
-export * from './gas'
+export * from './near';
+export * from './gas';

@@ -11,7 +11,11 @@ function clean(x) {
 }
 exports.clean = clean;
 function toHuman(x, nomination, baseUnit) {
-    throw new Error('toHuman not yet implemented');
+    throw new Error(`toHuman not yet implemented; called with ${JSON.stringify({
+        x,
+        nomination,
+        baseUnit,
+    })}`);
 }
 exports.toHuman = toHuman;
 //# sourceMappingURL=utils.js.map

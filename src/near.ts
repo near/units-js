@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-import { clean, toHuman } from './utils';
+import {clean, toHuman} from './utils';
 
 /**
  * Exponent for calculating how many indivisible units are there in one NEAR. See {@link NEAR_NOMINATION}.
@@ -9,7 +9,9 @@ export const NEAR_NOMINATION_EXP = 24;
 /**
  * Number of indivisible units in one NEAR. Derived from {@link NEAR_NOMINATION_EXP}.
  */
-export const NEAR_NOMINATION = new BN('10', 10).pow(new BN(NEAR_NOMINATION_EXP, 10));
+export const NEAR_NOMINATION = new BN('10', 10).pow(
+  new BN(NEAR_NOMINATION_EXP, 10),
+);
 
 export class NEAR extends BN {
   /**
@@ -21,7 +23,9 @@ export class NEAR extends BN {
    */
   static parse(amt: string): NEAR {
     if (!amt) {
-      throw new TypeError(`NEAR.parse expects a string, got '${amt.toString()}'`)
+      throw new TypeError(
+        `NEAR.parse expects a string, got '${amt.toString()}'`,
+      );
     }
 
     const amount = clean(amt);
@@ -33,7 +37,9 @@ export class NEAR extends BN {
     const wholePart = split[0];
     const fracPart = split[1] || '';
     if (fracPart.length > NEAR_NOMINATION_EXP) {
-      throw new Error(`Cannot parse '${amt}' as NEAR amount; fractional part contains more than ${NEAR_NOMINATION_EXP} digits`);
+      throw new Error(
+        `Cannot parse '${amt}' as NEAR amount; fractional part contains more than ${NEAR_NOMINATION_EXP} digits`,
+      );
     }
 
     return new NEAR(wholePart + fracPart.padEnd(NEAR_NOMINATION_EXP, '0'));
