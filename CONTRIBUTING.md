@@ -4,9 +4,9 @@ You want to help improve near-runner-js? Thank you!
 
 # Yarn 2
 
-This project uses [Yarn 2](https://yarnpkg.com/getting-started/migration) in [Zero-Install mode](https://yarnpkg.com/features/zero-installs) so you shouldn't have to run `yarn install` when you first clone this repository.
+This project uses [Yarn 2](https://yarnpkg.com/getting-started/migration) in [Zero-Install mode](https://yarnpkg.com/features/zero-installs), but it uses the nodeModules so you might still need to run `yarn install` when you first clone this repository.
 
-* Make sure you have [Node.js] and the latest [yarn] installed
+* Make sure you have [Node.js] and the latest [Yarn] installed
 * Clone the code
 * `cd` into the repo
 
@@ -20,7 +20,7 @@ Or run any other NPM package included in this project:
 * `yarn xo`
 
   [Node.js]: https://nodejs.org/en/download/package-manager/
-  [yarn]: https://yarnpkg.com/
+  [Yarn]: https://yarnpkg.com/
 
 # Recommendation: VS Code
 
