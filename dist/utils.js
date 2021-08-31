@@ -33,7 +33,7 @@ const prefixes = new Map([
     [-21, 'z'],
     [-24, 'y'],
 ]);
-function toHuman(x, baseUnit, decimals = 0, factor = 0) {
+function toHuman(x, baseUnit, decimals, factor = 0) {
     const nomination = new bn_js_1.default(10).pow(new bn_js_1.default(decimals));
     const quotient = x.div(nomination);
     const remainder = x.mod(nomination);

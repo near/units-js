@@ -5,4 +5,4 @@ import BN from 'bn.js';
  * @returns string The cleaned value
  */
 export declare function clean(x: string): string;
-export declare function toHuman(x: BN, baseUnit: string, decimals?: number, factor?: number): string;
+export declare function toHuman(x: BN, baseUnit: string, decimals: number, factor?: number): string;

@@ -32,7 +32,7 @@ const prefixes = new Map([
 export function toHuman(
   x: BN,
   baseUnit: string,
-  decimals = 0,
+  decimals: number,
   factor = 0,
 ): string {
   const nomination = new BN(10).pow(new BN(decimals));
