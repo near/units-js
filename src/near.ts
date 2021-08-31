@@ -15,9 +15,7 @@ export class NEAR extends BN {
    */
   static parse(amt: string): NEAR {
     if (!amt) {
-      throw new TypeError(
-        `NEAR.parse expects a string, got '${amt.toString()}'`,
-      );
+      throw new TypeError(`invalid input string: '${amt.toString()}'`);
     }
 
     const amount = clean(amt);

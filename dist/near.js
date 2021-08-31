@@ -19,7 +19,7 @@ class NEAR extends bn_js_1.default {
      */
     static parse(amt) {
         if (!amt) {
-            throw new TypeError(`NEAR.parse expects a string, got '${amt.toString()}'`);
+            throw new TypeError(`invalid input string: '${amt.toString()}'`);
         }
         const amount = (0, utils_1.clean)(amt);
         const split = amount.split('.');

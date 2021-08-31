@@ -15,5 +15,9 @@
   },
   "editor.codeActionsOnSave": {
     "spence-s.linter-xo": true
+  },
+  "jest.coverageColors": {
+    "uncovered": "rgba(238,117,190, 0.15)",
+    "partially-covered": "rgba(243,246,167, 0.15)"
   }
 }
