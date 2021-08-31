@@ -63,4 +63,4 @@ someAccount.call(
 
 `NEAR` and `Gas` also both override `toJSON` to get to a string version that can be passed as an argument to near-cli and in other contexts.
 
-See [__tests__](./__tests__) for a full list of examples of inputs that can be parsed and the human-readable version that can be returned by `near-units`.
+See [\_\_tests__](./__tests__) for a full list of examples of inputs that can be parsed and the human-readable version that can be returned by `near-units`.
