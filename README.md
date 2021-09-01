@@ -3,7 +3,7 @@ NEAR Units
 
 TypeScript/JavaScript tools to help parse and format NEAR units. For now, this means NEAR tokens and [gas units](https://docs.near.org/docs/concepts/gas).
 
-# Install:
+# Install
 
     npm i --save near-units
 
@@ -26,6 +26,8 @@ console.log(gas.toHuman()); // 1 Tgas
 const near = parse('1.25 mN');
 const gas = parse('1 Tgas');
 ```
+
+See [\_\_tests__](./__tests__) for a full list of examples of inputs that can be parsed and the human-readable version that can be returned by `toHuman`.
 
 # Doing math
 
@@ -70,5 +72,3 @@ someAccount.call(
 ```
 
 `NEAR` and `Gas` also both override `toJSON` to get to a string version that can be passed as an argument to near-cli and in other contexts.
-
-See [\_\_tests__](./__tests__) for a full list of examples of inputs that can be parsed and the human-readable version that can be returned by `near-units`.
