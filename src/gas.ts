@@ -1,21 +1,23 @@
 import BN from 'bn.js';
-import {clean, toHuman} from './utils';
+import {parse, gasPattern, toHuman} from './utils';
 
 export class Gas extends BN {
   /**
    * Convert human readable gas amount to internal indivisible units.
    *
-   * @param amt decimal string denominated in gas, Tgas, Ggas, etc.
-   * @returns new NEAR object wrapping the parsed amount
+   * @example
+   * ```ts
+   * Gas.parse('1') // => Gas<'1'> (1 gas)
+   * Gas.parse('1 Tgas') // => Gas<'1000000000000'> (1e12 gas)
+   * Gas.parse('1 Ggas') // => Gas<'1000000000'> (1e9 gas)
+   * ```
+   *
+   * @param x decimal string denominated in gas, Tgas, Ggas, etc.
+   * @returns new Gas object wrapping the parsed amount
    */
-  static parse(amt: string): Gas {
-    if (!amt) {
-      throw new TypeError(`invalid input string: '${amt.toString()}'`);
-    }
-
-    const amount = clean(amt);
-
-    return new Gas(amount);
+  static parse(x: string): Gas {
+    x = x.replace(gasPattern, '').trim(); // Clean string for use with generic `parse`
+    return new Gas(parse(x));
   }
 
   toJSON(): string {
@@ -23,7 +25,7 @@ export class Gas extends BN {
   }
 
   /**
-   * Convert to string such as "53 Tgas", "900 Ggas"
+   * Convert to string such as "53 Tgas" or "900 Ggas"
    * @returns string showing gas amount in a human-readable way
    */
   toHuman(): string {

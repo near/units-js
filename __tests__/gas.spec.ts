@@ -7,7 +7,9 @@ describe.each`
   ${'1,000,000'}         | ${'1000000'}       | ${'1 Mgas'}
   ${'1,000,000,000'}     | ${'1000000000'}    | ${'1 Ggas'}
   ${'1,000,000,000,000'} | ${'1000000000000'} | ${'1 Tgas'}
-`('NEAR.parse("$input")', ({input, gas, human}) => {
+  ${'1Tgas'}             | ${'1000000000000'} | ${'1 Tgas'}
+  ${'1Ggas'}             | ${'1000000000'}    | ${'1 Ggas'}
+`('Gas.parse("$input")', ({input, gas, human}) => {
   const g = Gas.parse(input);
 
   test(`toJSON() === "${gas}"`, () => {
@@ -24,5 +26,11 @@ describe('Gas.parse() errors', () => {
     expect(() => {
       Gas.parse('');
     }).toThrow('invalid input string');
+  });
+
+  test('decimals with no metric prefix', () => {
+    expect(() => {
+      Gas.parse('0.1 gas');
+    }).toThrow('Cannot parse');
   });
 });

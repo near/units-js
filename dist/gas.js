@@ -10,21 +10,25 @@ class Gas extends bn_js_1.default {
     /**
      * Convert human readable gas amount to internal indivisible units.
      *
-     * @param amt decimal string denominated in gas, Tgas, Ggas, etc.
-     * @returns new NEAR object wrapping the parsed amount
+     * @example
+     * ```ts
+     * Gas.parse('1') // => Gas<'1'> (1 gas)
+     * Gas.parse('1 Tgas') // => Gas<'1000000000000'> (1e12 gas)
+     * Gas.parse('1 Ggas') // => Gas<'1000000000'> (1e9 gas)
+     * ```
+     *
+     * @param x decimal string denominated in gas, Tgas, Ggas, etc.
+     * @returns new Gas object wrapping the parsed amount
      */
-    static parse(amt) {
-        if (!amt) {
-            throw new TypeError(`invalid input string: '${amt.toString()}'`);
-        }
-        const amount = (0, utils_1.clean)(amt);
-        return new Gas(amount);
+    static parse(x) {
+        x = x.replace(utils_1.gasPattern, '').trim(); // Clean string for use with generic `parse`
+        return new Gas((0, utils_1.parse)(x));
     }
     toJSON() {
         return this.toString(10);
     }
     /**
-     * Convert to string such as "53 Tgas", "900 Ggas"
+     * Convert to string such as "53 Tgas" or "900 Ggas"
      * @returns string showing gas amount in a human-readable way
      */
     toHuman() {

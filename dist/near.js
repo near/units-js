@@ -12,26 +12,22 @@ const utils_1 = require("./utils");
 exports.DECIMALS = 24;
 class NEAR extends bn_js_1.default {
     /**
-     * Convert human readable NEAR amount to internal indivisible units.
+     * Convert human readable NEAR amount string to a NEAR object.
      *
-     * @param amt decimal string (potentially fractional) denominated in NEAR.
+     * @example
+     * ```ts
+     * NEAR.parse('1') // => NEAR<'1000000000000000000000000'> (1e24 yoctoNEAR; 1 NEAR)
+     * NEAR.parse('1,000') // => NEAR<'1000000000000000000000000000'> (1e27 yoctoNEAR; 1,000 NEAR)
+     * NEAR.parse('1 mN') // => NEAR<'1000000000000000000000'> (1e21 yoctoNEAR; 0.001 NEAR)
+     * NEAR.parse('1 nN') // => NEAR<'1000000000000000'> (1e15 yoctoNEAR; 0.000000001 NEAR)
+     * ```
+     *
+     * @param x string representation of NEAR tokens amount
      * @returns new NEAR object wrapping the parsed amount
      */
-    static parse(amt) {
-        if (!amt) {
-            throw new TypeError(`invalid input string: '${amt.toString()}'`);
-        }
-        const amount = (0, utils_1.clean)(amt);
-        const split = amount.split('.');
-        if (split.length > 2) {
-            throw new Error(`Cannot parse '${amt}' as NEAR amount`);
-        }
-        const wholePart = split[0];
-        const fracPart = split[1] || '';
-        if (fracPart.length > exports.DECIMALS) {
-            throw new Error(`Cannot parse '${amt}' as NEAR amount; fractional part contains more than ${exports.DECIMALS} digits`);
-        }
-        return new NEAR(wholePart + fracPart.padEnd(exports.DECIMALS, '0'));
+    static parse(x) {
+        x = x.replace(utils_1.nearPattern, '').trim(); // Clean string for use with generic `parse`
+        return new NEAR((0, utils_1.parse)(x, 24));
     }
     /**
      * Convert underlying value into yoctoNEAR-as-string representation. You

@@ -14,7 +14,7 @@
     "build": "tsc",
     "lint": "xo",
     "lint:fix": "xo --fix",
-    "test": "yarn build && jest --verbose",
+    "test": "yarn build && jest",
     "prepare": "husky install"
   },
   "dependencies": {

@@ -15,9 +15,9 @@ Now you should be able to run project scripts:
 * `yarn test`
 * `yarn lint`
 
-Or run any other NPM package included in this project:
+Or run any other NPM package included in this project. For example, to run only tests that match pattern 'near':
 
-* `yarn xo`
+* `yarn jest near`
 
   [Node.js]: https://nodejs.org/en/download/package-manager/
   [Yarn]: https://yarnpkg.com/

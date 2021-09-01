@@ -3,7 +3,7 @@ NEAR Units
 
 TypeScript/JavaScript tools to help parse and format NEAR units. For now, this means NEAR tokens and [gas units](https://docs.near.org/docs/concepts/gas).
 
-#### Install:
+# Install:
 
     npm i --save near-units
 
@@ -11,17 +11,23 @@ Or using [Yarn](https://yarnpkg.com/):
 
     yarn add near-units
 
-#### Use:
+# Parsing strings
 
 ```js
-import { NEAR, Gas } from 'near-units';
+import { NEAR, Gas, parse } from 'near-units';
 
-const near = NEAR.parse('0.00125');
+const near = NEAR.parse('1.25 mN');
 console.log(near.toHuman()); // 1.25 mN
 
-const gas = Gas.parse('1,000,000,000,000');
+const gas = Gas.parse('1 Tgas');
 console.log(gas.toHuman()); // 1 Tgas
+
+// equivalent to the above, but TS typings might not be as helpful
+const near = parse('1.25 mN');
+const gas = parse('1 Tgas');
 ```
+
+# Doing math
 
 `NEAR` and `Gas` both wrap `BN` from [bn.js], so you can perform any math with them that you need:
 
@@ -36,6 +42,8 @@ const amount3 = amount1.mul(amount2);
 See [the bn.js docs for all possible operations][bn.js].
 
   [bn.js]: https://github.com/indutny/bn.js/
+
+# Interop
 
 Since they wrap `BN`, they can be passed directly to function calls with [near-api-js](https://github.com/near/near-api-js) or [near-runner](https://github.com/near/runner-js):
 

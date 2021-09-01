@@ -5,12 +5,20 @@ import BN from 'bn.js';
 export declare const DECIMALS = 24;
 export declare class NEAR extends BN {
     /**
-     * Convert human readable NEAR amount to internal indivisible units.
+     * Convert human readable NEAR amount string to a NEAR object.
      *
-     * @param amt decimal string (potentially fractional) denominated in NEAR.
+     * @example
+     * ```ts
+     * NEAR.parse('1') // => NEAR<'1000000000000000000000000'> (1e24 yoctoNEAR; 1 NEAR)
+     * NEAR.parse('1,000') // => NEAR<'1000000000000000000000000000'> (1e27 yoctoNEAR; 1,000 NEAR)
+     * NEAR.parse('1 mN') // => NEAR<'1000000000000000000000'> (1e21 yoctoNEAR; 0.001 NEAR)
+     * NEAR.parse('1 nN') // => NEAR<'1000000000000000'> (1e15 yoctoNEAR; 0.000000001 NEAR)
+     * ```
+     *
+     * @param x string representation of NEAR tokens amount
      * @returns new NEAR object wrapping the parsed amount
      */
-    static parse(amt: string): NEAR;
+    static parse(x: string): NEAR;
     /**
      * Convert underlying value into yoctoNEAR-as-string representation. You
      * should not need to call this explicitly; in most places where you need to
