@@ -10,9 +10,7 @@
   "files": [
     "dist/"
   ],
-  "bin": {
-    "near-units": "dist/cli.js"
-  },
+  "bin": "dist/cli.js",
   "scripts": {
     "build": "tsc",
     "lint": "xo",
