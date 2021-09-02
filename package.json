@@ -1,6 +1,6 @@
 {
   "name": "near-units",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Easily parse, inspect, and operate on NEAR token or gas amounts. Wraps bn.js",
   "repository": "https://github.com/near/units-js",
   "author": "Near Inc <team@near.org>",
