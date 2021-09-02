@@ -72,3 +72,23 @@ someAccount.call(
 ```
 
 `NEAR` and `Gas` also both override `toJSON` to get to a string version that can be passed as an argument to near-cli and in other contexts.
+
+# CLI
+
+This package ships with a minimal CLI:
+
+    npm i -g near-units
+
+Now you can `near-units --help`:
+
+    Parse and format NEAR tokens and gas units. Examples:
+
+        near-units 10 N # => 10000000000000000000000000
+        near-units -h 10000000000000000000000000 yN # => 10 N
+        near-units 50 Tgas # => 50000000000000
+        near-units -h 50000000000000 gas # => 50 Tgas
+
+You can use it anywhere near units are accepted. For example, on macOS & Linux, you can:
+
+    near call $LOCKUP transfer '{"receiver_id": "example.near", "amount": "'$(near-units 1N)'"}' --accountId=$ACCOUNT --gas=$(near-units 50Tgas)
+
