@@ -90,5 +90,9 @@ Now you can `near-units --help`:
 
 You can use it anywhere near units are accepted. For example, on macOS & Linux, you can:
 
-    near call $LOCKUP transfer '{"receiver_id": "example.near", "amount": "'$(near-units 1N)'"}' --accountId=$ACCOUNT --gas=$(near-units 50Tgas)
-
+```bash
+near call $LOCKUP transfer '{
+  "receiver_id": "example.near",
+  "amount": "'$(near-units 1N)'"
+}' --accountId=$ACCOUNT --gas=$(near-units 50Tgas)
+```
