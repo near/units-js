@@ -9,7 +9,7 @@ const parse_1 = require("./parse");
 const HELP = `Parse and format NEAR tokens and gas units. Examples:
 
     near-units 10 N # => 10000000000000000000000000
-    near-units -h 10000000000000000000000000N # => 10 N
+    near-units -h 10000000000000000000000000 yN # => 10 N
     near-units 50 Tgas # => 50000000000000
     near-units -h 50000000000000 gas # => 50 Tgas
 `;
