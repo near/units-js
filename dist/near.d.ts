@@ -1,9 +1,20 @@
 import BN from 'bn.js';
+import { BNWrapper } from './bn';
 /**
  * Exponent for calculating how many indivisible units are there in one NEAR. See {@link NEAR_NOMINATION}.
  */
 export declare const DECIMALS = 24;
-export declare class NEAR extends BN {
+export declare class NEAR extends BNWrapper<NEAR> {
+    /**
+     * Converts a BN or number to NEAR or parses a string into NEAR.
+     *
+     * @example
+     * ```ts
+     * const nearAmt  = NEAR.from(new BN("10000000"));
+     * const nearAmt2 = NEAR.from("1");
+     * ```
+     */
+    static from(bn: BN | number | string): NEAR;
     /**
      * Convert human readable NEAR amount string to a NEAR object.
      *

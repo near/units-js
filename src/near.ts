@@ -1,4 +1,5 @@
 import BN from 'bn.js';
+import {BNWrapper} from './bn';
 import {parse, nearPattern, toHuman} from './utils';
 
 /**
@@ -6,7 +7,24 @@ import {parse, nearPattern, toHuman} from './utils';
  */
 export const DECIMALS = 24;
 
-export class NEAR extends BN {
+export class NEAR extends BNWrapper<NEAR> {
+  /**
+   * Converts a BN or number to NEAR or parses a string into NEAR.
+   *
+   * @example
+   * ```ts
+   * const nearAmt  = NEAR.from(new BN("10000000"));
+   * const nearAmt2 = NEAR.from("1");
+   * ```
+   */
+  static from(bn: BN | number | string): NEAR {
+    if (typeof bn === 'string') {
+      return NEAR.parse(bn);
+    }
+
+    return new NEAR(bn);
+  }
+
   /**
    * Convert human readable NEAR amount string to a NEAR object.
    *

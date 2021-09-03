@@ -1,7 +1,25 @@
 import BN from 'bn.js';
+import {BNWrapper} from './bn';
 import {parse, gasPattern, toHuman} from './utils';
 
-export class Gas extends BN {
+export class Gas extends BNWrapper<Gas> {
+  /**
+   * Converts a BN or number to Gas or parses a string into Gas.
+   *
+   * @example
+   * ```ts
+   * const gas  = Gas.from(new BN("10000000"))
+   * const gas2 = Gas.from('1 TGas')
+   * ```
+   */
+  static from(bn: BN | number | string): Gas {
+    if (typeof bn === 'string') {
+      return Gas.parse(bn);
+    }
+
+    return new Gas(bn);
+  }
+
   /**
    * Convert human readable gas amount to internal indivisible units.
    *

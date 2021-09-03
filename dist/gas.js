@@ -1,12 +1,24 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Gas = void 0;
-const bn_js_1 = __importDefault(require("bn.js"));
+const bn_1 = require("./bn");
 const utils_1 = require("./utils");
-class Gas extends bn_js_1.default {
+class Gas extends bn_1.BNWrapper {
+    /**
+     * Converts a BN or number to Gas or parses a string into Gas.
+     *
+     * @example
+     * ```ts
+     * const gas  = Gas.from(new BN("10000000"))
+     * const gas2 = Gas.from('1 TGas')
+     * ```
+     */
+    static from(bn) {
+        if (typeof bn === 'string') {
+            return Gas.parse(bn);
+        }
+        return new Gas(bn);
+    }
     /**
      * Convert human readable gas amount to internal indivisible units.
      *

@@ -1,16 +1,28 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NEAR = exports.DECIMALS = void 0;
-const bn_js_1 = __importDefault(require("bn.js"));
+const bn_1 = require("./bn");
 const utils_1 = require("./utils");
 /**
  * Exponent for calculating how many indivisible units are there in one NEAR. See {@link NEAR_NOMINATION}.
  */
 exports.DECIMALS = 24;
-class NEAR extends bn_js_1.default {
+class NEAR extends bn_1.BNWrapper {
+    /**
+     * Converts a BN or number to NEAR or parses a string into NEAR.
+     *
+     * @example
+     * ```ts
+     * const nearAmt  = NEAR.from(new BN("10000000"));
+     * const nearAmt2 = NEAR.from("1");
+     * ```
+     */
+    static from(bn) {
+        if (typeof bn === 'string') {
+            return NEAR.parse(bn);
+        }
+        return new NEAR(bn);
+    }
     /**
      * Convert human readable NEAR amount string to a NEAR object.
      *
