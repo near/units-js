@@ -76,7 +76,7 @@ describe.each`
   ${'1'}       | ${'1 yN'}
   ${1}         | ${'1 yN'}
   ${new BN(1)} | ${'1 yN'}
-`('NEAR.from("$input")', ({fromInput, parseInput}) => {
+`('NEAR.from("$fromInput")', ({fromInput, parseInput}) => {
   const n = NEAR.from(fromInput);
   test(`== NEAR.parse(${parseInput})`, () => {
     expect(n).toStrictEqual(NEAR.parse(parseInput));

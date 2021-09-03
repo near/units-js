@@ -42,7 +42,7 @@ describe.each`
   ${'1'}       | ${'1 gas'}
   ${1}         | ${'1'}
   ${new BN(1)} | ${'1'}
-`('Gas.from("$input")', ({fromInput, parseInput}) => {
+`('Gas.from("$fromInput")', ({fromInput, parseInput}) => {
   const n = Gas.from(fromInput);
   test(`== Gas.parse(${parseInput})`, () => {
     expect(n).toStrictEqual(Gas.parse(parseInput));
