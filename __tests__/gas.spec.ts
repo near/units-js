@@ -1,3 +1,4 @@
+import BN from 'bn.js';
 import {Gas} from '../src';
 
 describe.each`
@@ -32,5 +33,18 @@ describe('Gas.parse() errors', () => {
     expect(() => {
       Gas.parse('0.1 gas');
     }).toThrow('Cannot parse');
+  });
+});
+
+describe.each`
+  fromInput    | parseInput
+  ${'1'}       | ${'1'}
+  ${'1'}       | ${'1 gas'}
+  ${1}         | ${'1'}
+  ${new BN(1)} | ${'1'}
+`('Gas.from("$fromInput")', ({fromInput, parseInput}) => {
+  const n = Gas.from(fromInput);
+  test(`== Gas.parse(${parseInput})`, () => {
+    expect(n).toStrictEqual(Gas.parse(parseInput));
   });
 });
