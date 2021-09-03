@@ -26,9 +26,6 @@ class Gas extends bn_1.BNWrapper {
         }
         return new Gas(bn);
     }
-    from(bn) {
-        return Gas.from(bn);
-    }
     /**
      * Convert human readable gas amount to internal indivisible units.
      *
@@ -52,6 +49,9 @@ class Gas extends bn_1.BNWrapper {
      */
     toHuman() {
         return (0, utils_1.toHuman)(this, 'gas', 12, 12);
+    }
+    from(bn) {
+        return Gas.from(bn);
     }
 }
 exports.Gas = Gas;

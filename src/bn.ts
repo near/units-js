@@ -438,5 +438,5 @@ export abstract class BNWrapper<T extends BN> extends BN {
     return super.toString(base, length);
   }
 
-  abstract from(bn: BN | number | string): T;
+  protected abstract from(bn: BN | number | string): T;
 }

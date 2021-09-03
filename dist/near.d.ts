@@ -15,7 +15,6 @@ export declare class NEAR extends BNWrapper<NEAR> {
      * ```
      */
     static from(bn: BN | number | string): NEAR;
-    from(bn: BN | number | string): NEAR;
     /**
      * Convert human readable NEAR amount string to a NEAR object.
      *
@@ -32,17 +31,9 @@ export declare class NEAR extends BNWrapper<NEAR> {
      */
     static parse(x: string): NEAR;
     /**
-     * Convert underlying value into yoctoNEAR-as-string representation. You
-     * should not need to call this explicitly; in most places where you need to
-     * pass a NEAR value to arguments you should be able to pass a NEAR object,
-     * and this will be called implicitly for you.
-     *
-     * @returns string representing yoctoNEAR amount
-     */
-    toJSON(): string;
-    /**
      * Convert to string such as "1,000 N", "1 mN", or "1 nN"
      * @returns string showing NEAR amount in a human-readable way
      */
     toHuman(): string;
+    protected from(bn: BN | number | string): NEAR;
 }

@@ -11,7 +11,6 @@ export declare class Gas extends BNWrapper<Gas> {
      * ```
      */
     static from(bn: BN | number | string): Gas;
-    from(bn: BN | number | string): Gas;
     /**
      * Convert human readable gas amount to internal indivisible units.
      *
@@ -31,4 +30,5 @@ export declare class Gas extends BNWrapper<Gas> {
      * @returns string showing gas amount in a human-readable way
      */
     toHuman(): string;
+    protected from(bn: BN | number | string): Gas;
 }

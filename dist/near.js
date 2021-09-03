@@ -30,9 +30,6 @@ class NEAR extends bn_1.BNWrapper {
         }
         return new NEAR(bn);
     }
-    from(bn) {
-        return NEAR.from(bn);
-    }
     /**
      * Convert human readable NEAR amount string to a NEAR object.
      *
@@ -52,22 +49,14 @@ class NEAR extends bn_1.BNWrapper {
         return new NEAR((0, utils_1.parse)(x, 24));
     }
     /**
-     * Convert underlying value into yoctoNEAR-as-string representation. You
-     * should not need to call this explicitly; in most places where you need to
-     * pass a NEAR value to arguments you should be able to pass a NEAR object,
-     * and this will be called implicitly for you.
-     *
-     * @returns string representing yoctoNEAR amount
-     */
-    toJSON() {
-        return this.toString();
-    }
-    /**
      * Convert to string such as "1,000 N", "1 mN", or "1 nN"
      * @returns string showing NEAR amount in a human-readable way
      */
     toHuman() {
         return (0, utils_1.toHuman)(this, 'N', exports.DECIMALS);
+    }
+    from(bn) {
+        return NEAR.from(bn);
     }
 }
 exports.NEAR = NEAR;

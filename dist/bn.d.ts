@@ -251,5 +251,5 @@ export declare abstract class BNWrapper<T extends BN> extends BN {
     toBigInt(): bigint;
     toJSON(): string;
     toString(base?: number | 'hex', length?: number): string;
-    abstract from(bn: BN | number | string): T;
+    protected abstract from(bn: BN | number | string): T;
 }

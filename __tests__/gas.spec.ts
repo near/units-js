@@ -48,4 +48,3 @@ describe.each`
     expect(n).toStrictEqual(Gas.parse(parseInput));
   });
 });
-
