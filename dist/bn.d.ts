@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-export declare class BNWrapper<T extends BN> extends BN {
+export declare abstract class BNWrapper<T extends BN> extends BN {
     /**
      * @description returns the maximum of 2 BN instances.
      */
@@ -235,7 +235,7 @@ export declare class BNWrapper<T extends BN> extends BN {
     /**
      * @description Extended GCD results `({ a: ..., b: ..., gcd: ... })`
      */
-    egcd(b: BN): {
+    egcd(bn: BN): {
         a: T;
         b: T;
         gcd: T;
@@ -244,4 +244,12 @@ export declare class BNWrapper<T extends BN> extends BN {
      * @description inverse `a` modulo `b`
      */
     invm(b: BN): T;
+    /**
+     * Convert to BigInt type
+     * @returns BigInt
+     */
+    toBigInt(): bigint;
+    toJSON(): string;
+    toString(base?: number | 'hex', length?: number): string;
+    abstract from(bn: BN | number | string): T;
 }

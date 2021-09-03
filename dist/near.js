@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NEAR = exports.DECIMALS = void 0;
+const bn_js_1 = __importDefault(require("bn.js"));
 const bn_1 = require("./bn");
 const utils_1 = require("./utils");
 /**
@@ -9,7 +13,7 @@ const utils_1 = require("./utils");
 exports.DECIMALS = 24;
 class NEAR extends bn_1.BNWrapper {
     /**
-     * Converts a BN or number to NEAR or parses a string into NEAR.
+     * Converts a BN, number, or string in yoctoNear to NEAR.
      *
      * @example
      * ```ts
@@ -18,20 +22,26 @@ class NEAR extends bn_1.BNWrapper {
      * ```
      */
     static from(bn) {
-        if (typeof bn === 'string') {
-            return NEAR.parse(bn);
+        if (bn instanceof bn_js_1.default) {
+            const near = new NEAR(0);
+            // @ts-expect-error internal method
+            bn.copy(near); // eslint-disable-line @typescript-eslint/no-unsafe-call
+            return near;
         }
         return new NEAR(bn);
+    }
+    from(bn) {
+        return NEAR.from(bn);
     }
     /**
      * Convert human readable NEAR amount string to a NEAR object.
      *
      * @example
      * ```ts
-     * NEAR.parse('1') // => NEAR<'1000000000000000000000000'> (1e24 yoctoNEAR; 1 NEAR)
+     * NEAR.parse('1')     // => NEAR<'1000000000000000000000000'> (1e24 yoctoNEAR; 1 NEAR)
      * NEAR.parse('1,000') // => NEAR<'1000000000000000000000000000'> (1e27 yoctoNEAR; 1,000 NEAR)
-     * NEAR.parse('1 mN') // => NEAR<'1000000000000000000000'> (1e21 yoctoNEAR; 0.001 NEAR)
-     * NEAR.parse('1 nN') // => NEAR<'1000000000000000'> (1e15 yoctoNEAR; 0.000000001 NEAR)
+     * NEAR.parse('1 mN')  // => NEAR<'1000000000000000000000'> (1e21 yoctoNEAR; 0.001 NEAR)
+     * NEAR.parse('1 nN')  // => NEAR<'1000000000000000'> (1e15 yoctoNEAR; 0.000000001 NEAR)
      * ```
      *
      * @param x string representation of NEAR tokens amount
@@ -50,7 +60,7 @@ class NEAR extends bn_1.BNWrapper {
      * @returns string representing yoctoNEAR amount
      */
     toJSON() {
-        return this.toString(10);
+        return this.toString();
     }
     /**
      * Convert to string such as "1,000 N", "1 mN", or "1 nN"

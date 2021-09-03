@@ -2,7 +2,7 @@ import BN from 'bn.js';
 import { BNWrapper } from './bn';
 export declare class Gas extends BNWrapper<Gas> {
     /**
-     * Converts a BN or number to Gas or parses a string into Gas.
+     * Converts a BN, number, or string in gas units to Gas.
      *
      * @example
      * ```ts
@@ -11,6 +11,7 @@ export declare class Gas extends BNWrapper<Gas> {
      * ```
      */
     static from(bn: BN | number | string): Gas;
+    from(bn: BN | number | string): Gas;
     /**
      * Convert human readable gas amount to internal indivisible units.
      *
@@ -25,7 +26,6 @@ export declare class Gas extends BNWrapper<Gas> {
      * @returns new Gas object wrapping the parsed amount
      */
     static parse(x: string): Gas;
-    toJSON(): string;
     /**
      * Convert to string such as "53 Tgas" or "900 Ggas"
      * @returns string showing gas amount in a human-readable way

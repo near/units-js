@@ -4,7 +4,7 @@ import {parse, gasPattern, toHuman} from './utils';
 
 export class Gas extends BNWrapper<Gas> {
   /**
-   * Converts a BN or number to Gas or parses a string into Gas.
+   * Converts a BN, number, or string in gas units to Gas.
    *
    * @example
    * ```ts
@@ -13,11 +13,18 @@ export class Gas extends BNWrapper<Gas> {
    * ```
    */
   static from(bn: BN | number | string): Gas {
-    if (typeof bn === 'string') {
-      return Gas.parse(bn);
+    if (bn instanceof BN) {
+      const gas = new Gas(0);
+      // @ts-expect-error internal method
+      bn.copy(gas); // eslint-disable-line @typescript-eslint/no-unsafe-call
+      return gas;
     }
 
     return new Gas(bn);
+  }
+
+  from(bn: BN | number | string): Gas {
+    return Gas.from(bn);
   }
 
   /**
@@ -36,10 +43,6 @@ export class Gas extends BNWrapper<Gas> {
   static parse(x: string): Gas {
     x = x.replace(gasPattern, '').trim(); // Clean string for use with generic `parse`
     return new Gas(parse(x));
-  }
-
-  toJSON(): string {
-    return this.toString(10);
   }
 
   /**

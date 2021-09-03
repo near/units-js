@@ -9,7 +9,7 @@ export const DECIMALS = 24;
 
 export class NEAR extends BNWrapper<NEAR> {
   /**
-   * Converts a BN or number to NEAR or parses a string into NEAR.
+   * Converts a BN, number, or string in yoctoNear to NEAR.
    *
    * @example
    * ```ts
@@ -18,11 +18,18 @@ export class NEAR extends BNWrapper<NEAR> {
    * ```
    */
   static from(bn: BN | number | string): NEAR {
-    if (typeof bn === 'string') {
-      return NEAR.parse(bn);
+    if (bn instanceof BN) {
+      const near = new NEAR(0);
+      // @ts-expect-error internal method
+      bn.copy(near); // eslint-disable-line @typescript-eslint/no-unsafe-call
+      return near;
     }
 
     return new NEAR(bn);
+  }
+
+  from(bn: BN | number | string): NEAR {
+    return NEAR.from(bn);
   }
 
   /**
@@ -30,10 +37,10 @@ export class NEAR extends BNWrapper<NEAR> {
    *
    * @example
    * ```ts
-   * NEAR.parse('1') // => NEAR<'1000000000000000000000000'> (1e24 yoctoNEAR; 1 NEAR)
+   * NEAR.parse('1')     // => NEAR<'1000000000000000000000000'> (1e24 yoctoNEAR; 1 NEAR)
    * NEAR.parse('1,000') // => NEAR<'1000000000000000000000000000'> (1e27 yoctoNEAR; 1,000 NEAR)
-   * NEAR.parse('1 mN') // => NEAR<'1000000000000000000000'> (1e21 yoctoNEAR; 0.001 NEAR)
-   * NEAR.parse('1 nN') // => NEAR<'1000000000000000'> (1e15 yoctoNEAR; 0.000000001 NEAR)
+   * NEAR.parse('1 mN')  // => NEAR<'1000000000000000000000'> (1e21 yoctoNEAR; 0.001 NEAR)
+   * NEAR.parse('1 nN')  // => NEAR<'1000000000000000'> (1e15 yoctoNEAR; 0.000000001 NEAR)
    * ```
    *
    * @param x string representation of NEAR tokens amount
@@ -53,7 +60,7 @@ export class NEAR extends BNWrapper<NEAR> {
    * @returns string representing yoctoNEAR amount
    */
   toJSON(): string {
-    return this.toString(10);
+    return this.toString();
   }
 
   /**

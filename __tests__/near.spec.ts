@@ -1,8 +1,10 @@
+import BN from 'bn.js';
 import {NEAR} from '../src';
 
 describe.each`
   input                     | yocto                                | human
   ${'1'}                    | ${'1000000000000000000000000'}       | ${'1 N'}
+  ${'.1000000000000'}       | ${'100000000000000000000000'}        | ${'100 mN'}
   ${'1.0'}                  | ${'1000000000000000000000000'}       | ${'1 N'}
   ${'1,000'}                | ${'1000000000000000000000000000'}    | ${'1,000 N'}
   ${'1,000,000'}            | ${'1000000000000000000000000000000'} | ${'1,000,000 N'}
@@ -66,5 +68,17 @@ describe('NEAR.parse() errors', () => {
 
   test("bald nano prefix, '1n', ambiguous with NEAR designation, '1N'", () => {
     expect(NEAR.parse('1n').toHuman()).toBe('1 N');
+  });
+});
+
+describe.each`
+  fromInput    | parseInput
+  ${'1'}       | ${'1 yN'}
+  ${1}         | ${'1 yN'}
+  ${new BN(1)} | ${'1 yN'}
+`('NEAR.from("$input")', ({fromInput, parseInput}) => {
+  const n = NEAR.from(fromInput);
+  test(`== NEAR.parse(${parseInput})`, () => {
+    expect(n).toStrictEqual(NEAR.parse(parseInput));
   });
 });

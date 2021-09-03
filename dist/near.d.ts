@@ -6,7 +6,7 @@ import { BNWrapper } from './bn';
 export declare const DECIMALS = 24;
 export declare class NEAR extends BNWrapper<NEAR> {
     /**
-     * Converts a BN or number to NEAR or parses a string into NEAR.
+     * Converts a BN, number, or string in yoctoNear to NEAR.
      *
      * @example
      * ```ts
@@ -15,15 +15,16 @@ export declare class NEAR extends BNWrapper<NEAR> {
      * ```
      */
     static from(bn: BN | number | string): NEAR;
+    from(bn: BN | number | string): NEAR;
     /**
      * Convert human readable NEAR amount string to a NEAR object.
      *
      * @example
      * ```ts
-     * NEAR.parse('1') // => NEAR<'1000000000000000000000000'> (1e24 yoctoNEAR; 1 NEAR)
+     * NEAR.parse('1')     // => NEAR<'1000000000000000000000000'> (1e24 yoctoNEAR; 1 NEAR)
      * NEAR.parse('1,000') // => NEAR<'1000000000000000000000000000'> (1e27 yoctoNEAR; 1,000 NEAR)
-     * NEAR.parse('1 mN') // => NEAR<'1000000000000000000000'> (1e21 yoctoNEAR; 0.001 NEAR)
-     * NEAR.parse('1 nN') // => NEAR<'1000000000000000'> (1e15 yoctoNEAR; 0.000000001 NEAR)
+     * NEAR.parse('1 mN')  // => NEAR<'1000000000000000000000'> (1e21 yoctoNEAR; 0.001 NEAR)
+     * NEAR.parse('1 nN')  // => NEAR<'1000000000000000'> (1e15 yoctoNEAR; 0.000000001 NEAR)
      * ```
      *
      * @param x string representation of NEAR tokens amount
