@@ -167,29 +167,32 @@ export function toHuman(
   x: BN,
   baseUnit: string,
   magnitude: number,
-  adjustMagnitude = 0,
+  adjustMagnitude = 0
 ): string {
-  const nomination = new BN(10).pow(new BN(magnitude));
+  let adjustment;
+  if (x.toString().length > magnitude) {
+    adjustment = 0;
+  } else {
+    adjustment = Math.ceil((magnitude - x.toString().length + 1) / 3) * 3;
+  }
+
+  const nomination = new BN(10).pow(new BN(magnitude - adjustment));
   const quotient = x.div(nomination);
   const remainder = x.mod(nomination);
 
-  if (quotient.gt(new BN(0))) {
-    // Format the part before the decimal in en-US format (like "1,000");
-    const integer = new Intl.NumberFormat('en-US').format(
-      BigInt(quotient.toString(10)),
-    );
+  // Format the part before the decimal in en-US format (like "1,000");
+  const integer = new Intl.NumberFormat("en-US").format(
+    BigInt(quotient.toString(10))
+  );
 
-    // Leave the part after the decimal as-is (like ".00100200003")
-    const fraction = remainder.eq(new BN(0))
-      ? ''
-      : `.${remainder
-          .toString(10)
-          .padStart(magnitude, '0')
-          .replace(/0+$\b/, '')}`;
+  // Leave the part after the decimal as-is (like ".00100200003")
+  const fraction = remainder.eq(new BN(0))
+    ? ""
+    : `.${remainder
+        .toString(10)
+        .padStart(magnitude - adjustment, "0")
+        .replace(/0+$\b/, "")}`;
 
-    const prefix = magnitudeToPrefix.get(adjustMagnitude)!;
-    return `${integer}${fraction} ${prefix}${baseUnit}`;
-  }
-
-  return toHuman(x, baseUnit, magnitude - 3, adjustMagnitude - 3);
+  const prefix = magnitudeToPrefix.get(adjustMagnitude - adjustment)!;
+  return `${integer}${fraction} ${prefix}${baseUnit}`;
 }
