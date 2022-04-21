@@ -170,7 +170,7 @@ export function toHuman(
   adjustMagnitude = 0
 ): string {
   const numberOfDigits = x.toString().length;
-  const adjustment = numberOfDigits > magnitude ? 0 : Math.ceil((magnitude - x.toString().length + 1) / 3) * 3;
+  const adjustment = numberOfDigits > magnitude ? 0 : Math.ceil((magnitude - numberOfDigits + 1) / 3) * 3;
   const nomination = new BN(10).pow(new BN(magnitude - adjustment));
   const quotient = x.div(nomination);
   const remainder = x.mod(nomination);
