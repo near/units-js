@@ -1,7 +1,7 @@
 NEAR Units
 ==========
 
-TypeScript/JavaScript tools to help parse and format NEAR units. For now, this means NEAR tokens and [gas units](https://docs.near.org/docs/concepts/gas).
+TypeScript/JavaScript tools to help parse and format NEAR units. For now, this means NEAR tokens and [gas units](https://docs.near.org/concepts/basics/transactions/gas).
 
 # Install
 
